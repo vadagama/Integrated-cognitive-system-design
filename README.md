@@ -389,7 +389,7 @@ Before the start of the project an expert assessment together with the business 
 
 Below is a context diagram that shows a list of actors and external systems related to the solution.
 
-![C4 Context](images\C4_Geo-C4-Context.png)
+![C4 Context](images/C4_Geo-C4-Context.png)
 
 To implement the required functionality on the scope of open source software it is necessary to create 4 landscapes to ensure the process of development and updating of the code and components of the solution in the course of iterative development using DevSecOps corporate pipeline architecture and solutions of the PaaS Platform, including the containerized corporate CaaS platform.
 
@@ -408,7 +408,7 @@ The target system landscape is planned with the following composition:
 
 The container diagram of the business system for the current version of the solution is shown in the following figure.
 
-![C4 Container](images\C4_Geo-C4-Container.png)
+![C4 Container](images/C4_Geo-C4-Container.png)
 
 ## Integration of technical systems
 
@@ -422,7 +422,7 @@ Git replication is used to transfer all code sources and configuration files in 
 
 The current integration diagram of the IT solution's related business systems is shown in the figure below.
 
-![Geo-C4 Container](images\geo-integrations.png)
+![Geo-C4 Container](images/geo-integrations.png)
 
 The following integrations are implemented at the MVP Development stage:
 * With MS Active Directory for authentication and access authorization integration not directly, but through the system SSO based on KeyCloak as part of the PaaS platform;
@@ -654,7 +654,7 @@ The diagram of the current logical model of the data processed by the business s
 
 When implementing the target data model, refinements are possible during the iterative development of the IT solution.
 
-![data flows](images\geo-data-flows.png)
+![data flows](images/geo-data-flows.png)
 
 ## Physical data model
 
@@ -708,7 +708,7 @@ Control of temporary data integrity in the System is carried out by means of DBM
 
 A diagram of the solution landscape deployment is shown in the figure below.
 
-![C4 Deployment](images\C4_Template-C4 Deployment.png)
+![C4 Deployment](images/C4_Template-C4-Deployment.png)
 
 The System includes four landscapes: 
 * Productive (PROD) - a fully functional landscape ensuring fulfillment of the NFR, including performance and fault tolerance requirements;
