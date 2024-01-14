@@ -13,11 +13,12 @@ An integrated cognitive business system for objectively accounting for uncertain
 - [Non-functional requirements](#non-functional-requirements)
 - [List of related systems and external interfaces](#list-of-related-systems-and-external-interfaces)
 - [Strategy for selecting a target solution](#strategy-for-selecting-a-target-solution)
-- [Context and scope](#context-and-scope)
-  - [Integration of technical systems](#integration-of-technical-systems)
-- [Integration Architecture](#integration-architecture)
+- [Context and scope view](#context-and-scope-view)
+- [Containers view](#containers-view)
+- [Integration Architecture view](#integration-architecture-view)
   - [Business systems integration diagram](#business-systems-integration-diagram)
   - [Register of integration interfaces](#register-of-integration-interfaces)
+  - [Integration of technical systems](#integration-of-technical-systems)
 - [Information architecture of the solution](#information-architecture-of-the-solution)
   - [Logical data model](#logical-data-model)
   - [Physical data model](#physical-data-model)
@@ -385,13 +386,25 @@ Before the start of the project an expert assessment together with the business 
 * On the market of specialized software in geology and system development there are no solutions that fully possess the required functionality, as well as meet the required flexibility in terms of calculations, the ability to configure the required algorithms, integration capabilities, usability. 
 * In this regard, the selection of alternative solutions was not carried out - it was decided to implement the solution as a custom development.
 
-# Context and scope
+# Context and scope view
 
 Below is a context diagram that shows a list of actors and external systems related to the solution.
 
 ![C4 Context](images/C4_Geo-C4-Context.png)
 
 To implement the required functionality on the scope of open source software it is necessary to create 4 landscapes to ensure the process of development and updating of the code and components of the solution in the course of iterative development using DevSecOps corporate pipeline architecture and solutions of the PaaS Platform, including the containerized corporate CaaS platform.
+
+The target system landscape is planned with the following composition:
+* Development Landscape in the Data Center on the DEV resources of the SaaS platform;
+* Test landscape in the  Data Center on the UAT resources of the SaaS platform;
+* Pre-productive landscape in the  Data Center on the STAGE resources of the SaaS platform;
+* Productive landscape in the Data Center on the STAGE resources of the SaaS platform;
+
+# Containers view
+
+The container diagram of the business system for the current version of the solution is shown in the following figure.
+
+![C4 Container](images/C4_Geo-C4-Container.png)
 
 The main components of the IT solution foundation for the current stage of System development are:
 * MongoDB DBMS;
@@ -400,23 +413,7 @@ The main components of the IT solution foundation for the current stage of Syste
 * Executable modules in Python language based on FastAPI;
 * Microservice environment based on OKD and OpenShift container platform.
 
-The target system landscape is planned with the following composition:
-* Development Landscape in the Data Center on the DEV resources of the SaaS platform;
-* Test landscape in the  Data Center on the UAT resources of the SaaS platform;
-* Pre-productive landscape in the  Data Center on the STAGE resources of the SaaS platform;
-* Productive landscape in the Data Center on the STAGE resources of the SaaS platform;
-
-The container diagram of the business system for the current version of the solution is shown in the following figure.
-
-![C4 Container](images/C4_Geo-C4-Container.png)
-
-## Integration of technical systems
-
-For the implementation of CI/CD development processes, integration technical interaction between different segments of the business system with corporate utility services implemented in the related DevSecOps project is used. 
-
-Git replication is used to transfer all code sources and configuration files in YAML format to run containers. 
-
-# Integration Architecture
+# Integration Architecture view
 
 ## Business systems integration diagram
 
@@ -645,6 +642,12 @@ Message
    </td>
   </tr>
 </table>
+
+## Integration of technical systems
+
+For the implementation of CI/CD development processes, integration technical interaction between different segments of the business system with corporate utility services implemented in the related DevSecOps project is used. 
+
+Git replication is used to transfer all code sources and configuration files in YAML format to run containers. 
 
 # Information architecture of the solution
 
