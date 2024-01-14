@@ -654,13 +654,13 @@ The diagram of the current logical model of the data processed by the business s
 
 When implementing the target data model, refinements are possible during the iterative development of the IT solution.
 
-![data flows](images/geo-data-flows.png)
+![Logical model](images/geo-logical-model.png)
 
 ## Physical data model
 
 Instead of separate attribute diagrams describing the composition of attributes of a business system entity type for each type of system entity separately, a physical data model diagram is provided, which allows not only describing the composition of attributes, but also tracing the relationship between these attributes and different business entities (subject area entities) of the business system.
 
-![alt_text](images/geo-physical-model.png)
+![Physical model](images/geo-physical-model.png)
 
 # List of directories
 
