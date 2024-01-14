@@ -11,18 +11,18 @@ An integrated cognitive business system for objectively accounting for uncertain
 - [Functional roles](#functional-roles)
 - [Functional requirements](#functional-requirements)
 - [Non-functional requirements](#non-functional-requirements)
-- [List of related systems and external interfaces](#list-of-related-systems-and-external-interfaces)
 - [Strategy for selecting a target solution](#strategy-for-selecting-a-target-solution)
 - [Context and scope view](#context-and-scope-view)
 - [Containers view](#containers-view)
 - [Integration Architecture view](#integration-architecture-view)
   - [Business systems integration diagram](#business-systems-integration-diagram)
+  - [List of related systems and external interfaces](#list-of-related-systems-and-external-interfaces)
   - [Register of integration interfaces](#register-of-integration-interfaces)
   - [Integration of technical systems](#integration-of-technical-systems)
 - [Information architecture of the solution](#information-architecture-of-the-solution)
   - [Logical data model](#logical-data-model)
   - [Physical data model](#physical-data-model)
-- [List of directories](#list-of-directories)
+  - [List of directories](#list-of-directories)
   - [Data protection](#data-protection)
 - [Deployment view](#deployment-view)
   - [Software and hardware components of the infrastructure](#software-and-hardware-components-of-the-infrastructure)
@@ -33,6 +33,7 @@ An integrated cognitive business system for objectively accounting for uncertain
     - [Licensing of information security software](#licensing-of-information-security-software)
   - [ADR-2: Scaling the system](#adr-2-scaling-the-system)
   - [ADR-3: Data security](#adr-3-data-security)
+
 
 
 # Purpose of the document
@@ -295,7 +296,60 @@ Network security shall be implemented in accordance with the requirements of the
 7. The system shall store secrets (passwords, database connection strings, etc.) in a special protected secrets storage in case of organizational and technical capability of the PaaS platform.
 8. Storing secrets in code or configuration files is prohibited.
 
-# List of related systems and external interfaces
+# Strategy for selecting a target solution
+
+The business system is being developed as a custom development of a digital product using an agile methodology.
+
+Before the start of the project an expert assessment together with the business of potentially possible implementation options was carried out and the following analysis results were obtained:
+* On the market of specialized software in geology and system development there are no solutions that fully possess the required functionality, as well as meet the required flexibility in terms of calculations, the ability to configure the required algorithms, integration capabilities, usability. 
+* In this regard, the selection of alternative solutions was not carried out - it was decided to implement the solution as a custom development.
+
+# Context and scope view
+
+Below is a context diagram that shows a list of actors and external systems related to the solution.
+
+![C4 Context](images/C4_Geo-C4-Context.png)
+
+To implement the required functionality on the scope of open source software it is necessary to create 4 landscapes to ensure the process of development and updating of the code and components of the solution in the course of iterative development using DevSecOps corporate pipeline architecture and solutions of the PaaS Platform, including the containerized corporate CaaS platform.
+
+The target system landscape is planned with the following composition:
+* Development Landscape in the Data Center on the DEV resources of the SaaS platform;
+* Test landscape in the  Data Center on the UAT resources of the SaaS platform;
+* Pre-productive landscape in the  Data Center on the STAGE resources of the SaaS platform;
+* Productive landscape in the Data Center on the STAGE resources of the SaaS platform;
+
+# Containers view
+
+The container diagram of the business system for the current version of the solution is shown in the following figure.
+
+![C4 Container](images/C4_Geo-C4-Container.png)
+
+The main components of the IT solution foundation for the current stage of System development are:
+* MongoDB DBMS;
+* NGINX Web-server for web-proxy and web-service static Front-End;
+* Executable modules in Node.JS language and Nest, Express, React, Redux frameworks;
+* Executable modules in Python language based on FastAPI;
+* Microservice environment based on OKD and OpenShift container platform.
+
+# Integration Architecture view
+
+## Business systems integration diagram
+
+The current integration diagram of the IT solution's related business systems is shown in the figure below.
+
+![Geo-C4 Container](images/geo-integrations.png)
+
+The following integrations are implemented at the MVP Development stage:
+* With MS Active Directory for authentication and access authorization integration not directly, but through the system SSO based on KeyCloak as part of the PaaS platform;
+* Integration with ArcSight for uploading security events not directly, but through the system Fluend as part of the PaaS platform;
+* With Antreal GIS system for utilization of map information;
+* With Cloudian HyperStore system for object S3 storage;
+* With MS Exchange system for transfer of mail messages with feedback form;
+* With the system 1C for receiving actual corporate directories.
+
+When realizing the target diagram of integration of related business systems of the IT solution can be clarified at subsequent stages of the project. The target diagram of business systems integration is designed iteratively in the process of development realization.
+
+## List of related systems and external interfaces
 
 Basic requirements for external interfaces for the MVP Development phase.
 
@@ -377,59 +431,6 @@ The target variant of the solution should be realized through a single SSO servi
 </table>
 
 
-
-# Strategy for selecting a target solution
-
-The business system is being developed as a custom development of a digital product using an agile methodology.
-
-Before the start of the project an expert assessment together with the business of potentially possible implementation options was carried out and the following analysis results were obtained:
-* On the market of specialized software in geology and system development there are no solutions that fully possess the required functionality, as well as meet the required flexibility in terms of calculations, the ability to configure the required algorithms, integration capabilities, usability. 
-* In this regard, the selection of alternative solutions was not carried out - it was decided to implement the solution as a custom development.
-
-# Context and scope view
-
-Below is a context diagram that shows a list of actors and external systems related to the solution.
-
-![C4 Context](images/C4_Geo-C4-Context.png)
-
-To implement the required functionality on the scope of open source software it is necessary to create 4 landscapes to ensure the process of development and updating of the code and components of the solution in the course of iterative development using DevSecOps corporate pipeline architecture and solutions of the PaaS Platform, including the containerized corporate CaaS platform.
-
-The target system landscape is planned with the following composition:
-* Development Landscape in the Data Center on the DEV resources of the SaaS platform;
-* Test landscape in the  Data Center on the UAT resources of the SaaS platform;
-* Pre-productive landscape in the  Data Center on the STAGE resources of the SaaS platform;
-* Productive landscape in the Data Center on the STAGE resources of the SaaS platform;
-
-# Containers view
-
-The container diagram of the business system for the current version of the solution is shown in the following figure.
-
-![C4 Container](images/C4_Geo-C4-Container.png)
-
-The main components of the IT solution foundation for the current stage of System development are:
-* MongoDB DBMS;
-* NGINX Web-server for web-proxy and web-service static Front-End;
-* Executable modules in Node.JS language and Nest, Express, React, Redux frameworks;
-* Executable modules in Python language based on FastAPI;
-* Microservice environment based on OKD and OpenShift container platform.
-
-# Integration Architecture view
-
-## Business systems integration diagram
-
-The current integration diagram of the IT solution's related business systems is shown in the figure below.
-
-![Geo-C4 Container](images/geo-integrations.png)
-
-The following integrations are implemented at the MVP Development stage:
-* With MS Active Directory for authentication and access authorization integration not directly, but through the system SSO based on KeyCloak as part of the PaaS platform;
-* Integration with ArcSight for uploading security events not directly, but through the system Fluend as part of the PaaS platform;
-* With Antreal GIS system for utilization of map information;
-* With Cloudian HyperStore system for object S3 storage;
-* With MS Exchange system for transfer of mail messages with feedback form;
-* With the system 1C for receiving actual corporate directories.
-
-When realizing the target diagram of integration of related business systems of the IT solution can be clarified at subsequent stages of the project. The target diagram of business systems integration is designed iteratively in the process of development realization.
 
 ## Register of integration interfaces
 
@@ -665,7 +666,7 @@ Instead of separate attribute diagrams describing the composition of attributes 
 
 ![Physical model](images/geo-physical-model.png)
 
-# List of directories
+## List of directories
 
 This section captures potential reference guides for the target solution. Since the business system belongs to block systems, it is necessary to use reference master directories from the 1C system.
 
